@@ -12,21 +12,13 @@ export default class Cart {
     }
 
     sumWithoutDiscount(items: Buyable[]): number {
-        let totalPrice = 0;
-        for (const item of items) {
-            totalPrice += item.price;
-        }
+        let totalPrice = items.reduce((acc, item) => acc + item.price, 0);
         return totalPrice;
     }
     
     sumWithDiscount(items: Buyable[], discount: number): number {
-        let totalPrice = 0;
-        for (const item of items) {
-            totalPrice += item.price;
-        }
-        console.log(totalPrice)
+        let totalPrice = this.sumWithoutDiscount(items);
         let discountAmount = totalPrice * (discount / 100);
-        console.log(discountAmount)
         let totalPriceWithDiscount = totalPrice - discountAmount;
         return Math.ceil(totalPriceWithDiscount);
     }
